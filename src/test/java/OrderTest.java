@@ -20,7 +20,6 @@ import static org.junit.Assert.assertTrue;
 public class OrderTest {
 
     private WebDriver driver;
-    private WebDriverWait wait;
     private HomePage homePage;
     private OrderPage orderPage;
     private RentPage rentPage;
@@ -50,7 +49,7 @@ public class OrderTest {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://qa-scooter.praktikum-services.ru/");
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         homePage = new HomePage(driver);
         orderPage = new OrderPage(driver);

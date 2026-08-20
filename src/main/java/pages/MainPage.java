@@ -11,9 +11,8 @@ import java.util.List;
 
 public class MainPage {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
-    private HomePage homePage;
+    private final WebDriver driver;
+    private final WebDriverWait wait;
 
     private final By faq = By.className("Home_FAQ__3uVm4"); // блок FAQ
     private final By questionsLocator = By.className("accordion__button"); // вопросы

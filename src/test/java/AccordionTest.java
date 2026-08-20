@@ -14,8 +14,8 @@ public class AccordionTest {
 
  private WebDriver driver;
  private MainPage mainPage;
- private String expectedAnswer;
- private int index;
+ private final String expectedAnswer;
+ private final int index;
 
  public AccordionTest(String expectedAnswer, int index) {
   this.expectedAnswer = expectedAnswer;

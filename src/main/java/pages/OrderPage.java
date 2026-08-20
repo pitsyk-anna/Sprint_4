@@ -19,6 +19,7 @@ public class OrderPage {
     private final By nextButton = By.xpath("//button[contains(text(), 'Далее')]"); // кнопка Далее
     private final By subwayDropdown = By.cssSelector(".select-search__select"); // дропдаун с названиями станций
 
+
     public OrderPage(WebDriver driver) {
         this.driver = driver;
     }
