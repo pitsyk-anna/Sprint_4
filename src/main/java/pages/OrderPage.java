@@ -17,6 +17,7 @@ public class OrderPage {
     private final By inputSubway = By.xpath("//input[@placeholder ='* Станция метро']"); // поле Метро
     private final By inputPhone = By.xpath("//input[@placeholder ='* Телефон: на него позвонит курьер']"); // поле Номер телефона
     private final By nextButton = By.xpath("//button[contains(text(), 'Далее')]"); // кнопка Далее
+    private final By subwayDropdown = By.cssSelector(".select-search__select"); // дропдаун с названиями станций
 
     public OrderPage(WebDriver driver) {
         this.driver = driver;
@@ -38,7 +39,7 @@ public class OrderPage {
         driver.findElement(inputSubway).click(); // клик по полю Метро
         driver.findElement(inputSubway).sendKeys(stationName);// ввод станции
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5)); //ожидание появления списка станций
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".select-search__select")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(subwayDropdown));
         By optionLocator = By.xpath("//*[contains(text(), '" + stationName + "')]");
         driver.findElement(optionLocator).click(); // поиск по элементу и клик по нему
         return this;

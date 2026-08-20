@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
@@ -36,13 +37,24 @@ public class MainPage {
     }
 
     // список всех кнопок вопросов
-    public List<WebElement>getQuestionButtons() {
+    public List<WebElement> getQuestionButtons() {
         return driver.findElements(questionsLocator);
     }
 
 
     // список всех панелей ответов
-    public List<WebElement>getAnswers() {
+    public List<WebElement> getAnswers() {
         return driver.findElements(answersLocator);
+    }
+
+    public void clickQuestionButtons(int index) {
+        List<WebElement> questionButtons = getQuestionButtons();
+        questionButtons.get(index).click();
+    }
+    // получение текста ответа по индексу
+    public String getAnswerText(int index) {
+        List<WebElement> answerPanels = getAnswers();
+        wait.until(ExpectedConditions.visibilityOf(answerPanels.get(index)));
+        return answerPanels.get(index).getText();
     }
 }

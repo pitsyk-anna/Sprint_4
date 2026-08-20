@@ -3,22 +3,17 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 //import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.MainPage;
-import java.time.Duration;
-import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 
 @RunWith(Parameterized.class)
 public class AccordionTest {
 
- private static WebDriver driver;
- private static MainPage mainPage;
+ private WebDriver driver;
+ private MainPage mainPage;
  private String expectedAnswer;
  private int index;
 
@@ -27,8 +22,8 @@ public class AccordionTest {
   this.index = index;
  }
 
- @BeforeClass
- public static void setUp() {
+ @Before
+ public void setUp() {
   WebDriverManager.chromedriver().setup();
   driver = new ChromeDriver();
   driver.manage().window().maximize();
@@ -56,30 +51,22 @@ public class AccordionTest {
 
  @Test
  public void testAccordionQuestions() {
-
-  // Список кнопок вопроса
-  List<WebElement> questionButtons = mainPage.getQuestionButtons();
-  questionButtons.get(index).click();
-
-  List<WebElement> answerPanels = mainPage.getAnswers(); // Список панелей ответов
-  WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-  wait.until(ExpectedConditions.visibilityOf(answerPanels.get(index)));
-
-  String actualAnswerText = answerPanels.get(index).getText();
-
+  mainPage.clickQuestionButtons(index);           // клик по кнопке вопроса
+  String actualAnswerText = mainPage.getAnswerText(index); // получение текста ответа
 
   assertEquals("Текст не соответствует ожидаемому для вопроса " + index,
           expectedAnswer, actualAnswerText);
-
  }
 
- @AfterClass
- public static void tearDown() {
+
+ @After
+ public void tearDown() {
   if (driver != null) {
    driver.quit();
   }
  }
 }
+
 
 
 
